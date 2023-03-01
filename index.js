@@ -30,6 +30,10 @@ const init = async () => {
   console.log(res.data)
 }
 
+app.get('/', (req, res) => {
+  return res.send("It's alive!")
+})
+
 app.post(URI, async (req, res) => {
   console.log(req.body)
 
@@ -38,10 +42,14 @@ app.post(URI, async (req, res) => {
 
   const chatId = req.body.message.chat.id
   const text = req.body.message.text
+  const { username, first_name: firstName } =  req.body.message.from
+  const message = `👋 Hola ${firstName || username }. 
+  Soy un bot 🤖 trader, todavía no estoy listo, pero mi *Amo* 🤓 me esta terminando de programar para poder ayudarte. 
+  🚀 Pronto tendrás más novedades...`
 
   await axios.post(`${TELEGRAM_API}/sendMessage`, {
     chat_id: chatId,
-    text: text
+    text: message
   })
   return res.send()
 })
