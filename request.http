@@ -1,0 +1,8 @@
+### send a custom message through the bot
+POST http://localhost:5000/api/v1/send-message HTTP/1.1
+content-type: application/json
+
+{
+  "message": "Mi amo me programo para seducirte",
+  "chatId": 1524071885
+}
