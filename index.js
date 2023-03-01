@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const axios = require('axios')
 const bodyParser = require('body-parser')
+const { writeJson, readJson } = require('fs-extra')
 
 const { TOKEN, SERVER_URL } = process.env
 const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
@@ -11,6 +12,19 @@ const WEBHOOK_URL = SERVER_URL + URI
 const app = express()
 app.use(bodyParser.json())
 
+const appendNewChat = async ({ path, chat }) => {
+  try {
+    path = path || './data/chats.json'
+    const dataReaded = await readJson(path)
+    const data = [...dataReaded, chat]
+    
+    await writeJson(path, data)
+    console.log('Data written successfully!')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const init = async () => {
   const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`)
   console.log(res.data)
@@ -18,6 +32,9 @@ const init = async () => {
 
 app.post(URI, async (req, res) => {
   console.log(req.body)
+
+  const chat = req.body.message.chat.id
+  appendNewChat({ chat })
 
   const chatId = req.body.message.chat.id
   const text = req.body.message.text
@@ -28,6 +45,8 @@ app.post(URI, async (req, res) => {
   })
   return res.send()
 })
+
+
 
 app.listen(process.env.PORT || 5000, async () => {
   console.log('🚀 app running on port', process.env.PORT || 5000)
