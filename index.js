@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
 })
 
 app.post(URI, async (req, res) => {
-  console.log(req.body)
-
-  const chat = req.body.message.chat.id
+  // const chat = req.body.message.chat
+  const chat = req.body
+  console.log(chat)
   appendNewChat({ chat })
 
   const chatId = req.body.message.chat.id
