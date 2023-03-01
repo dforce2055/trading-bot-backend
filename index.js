@@ -54,6 +54,23 @@ app.post(URI, async (req, res) => {
   return res.send()
 })
 
+app.post('/api/v1/send-message', async (req, res) => {
+  const { message, chatId } = req.body
+
+  if (!message || !chatId)
+    return res.status(400).send({
+      message: 'Message or chatId is missing!'
+    })
+
+  await axios.post(`${TELEGRAM_API}/sendMessage`, {
+    chat_id: chatId,
+    text: message
+  })
+  return res.status(200).send({
+    message: 'Message sent successfully!'
+  })
+})
+
 
 
 app.listen(process.env.PORT || 5000, async () => {
