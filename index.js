@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 
 app.post(URI, async (req, res) => {
   // const chat = req.body.message.chat
-  const chat = req.body
+  const chat = { ...req.body }
   console.log(chat)
   appendNewChat({ chat })
 
