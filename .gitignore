@@ -40,3 +40,6 @@ lerna-debug.log*
 # lock files for npm and yarn
 package-lock.json
 yarn.lock
+
+# data
+data/chats.json
