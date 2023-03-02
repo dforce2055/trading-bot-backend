@@ -100,17 +100,17 @@ const executeAction = async ({ action, username, firstName }) => {
 
   switch (text) {
     case '/start':
-      message = `Bien, para comenzara a operar necesito ingrese tu token de acceso🔑.
-        ingresa /token=TU_TOKEN_DE_ACCESO`
+      message = `Bien, para comenzara a operar necesito ingreses tu token de acceso🔑.
+      ingresa /token=TU_TOKEN_DE_ACCESO`
       return { message }
     case '/hola':
       message = `Hola ${ firstName || username }, 
-        soy un bot 🤖 trader, estoy en desarrollo. 
-        🚀 Pronto tendrás más novedades...`
+      soy un bot 🤖 trader, estoy en desarrollo. 
+      🚀 Pronto tendrás más novedades...`
       return { message }
     case '/token':
       message = `🔑 Ingresa tu token de acceso a la plataforma, debería ser algo parecido a esto XXErgW222NohksffsadZrN2055PKxbl_bot.
-        Si todavía no tenes tu token de accesso, registrate primero para obtenerlo.`
+      Si todavía no tenes tu token de accesso, registrate primero para obtenerlo.`
       return { message }
     case '/token-recibed':
       // TODO: verify token
