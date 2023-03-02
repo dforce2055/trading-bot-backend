@@ -89,7 +89,7 @@ const getAcction = ({ text, botCommands }) => {
 }
 const executeAction = async ({ action, username, firstName }) => {
   const { text } = action
-  let message = `Lo siento, todavía no sé, como responder esa pregunta.`
+  let message = `Lo siento, todavía no sé, como responder esa pregunta. Podes consultar el menu de opciones que tengo disponibles, abajo a la izquierda.`
 
   switch (text) {
     case '/hola':
@@ -135,7 +135,7 @@ const handleResponse = async ({ chat }) => {
     const chatId = chat.message.chat.id
     return {
       chatId,
-      message: 'Lo siento, todavía no sé, como responder esa pregunta.'
+      message: 'Lo siento, todavía no sé, como responder esa pregunta. Podes consultar el menu de opciones que tengo disponibles, abajo a la izquierda.'
     }
   }
 }
