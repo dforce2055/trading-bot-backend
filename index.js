@@ -129,8 +129,8 @@ const handleResponse = async ({ chat }) => {
     if (!chat)
       throw new error
 
-    const chatId = chat.message.chat.id
-    const text = chat.message.text
+    const chatId = chat.message.chat.id || chat.edited_message.chat.id
+    const text = chat.message.text || chat.edited_message.text
     const { username, first_name: firstName } = chat.message.from
   
     const entities = chat.message.entities
