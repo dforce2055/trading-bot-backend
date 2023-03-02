@@ -1,3 +1,36 @@
+### handle a message from the bot
+POST http://localhost:5000/webhook/6087094926:AAErgW2fZNohks6mVZrN5OPKxblyWxcc_bY HTTP/1.1
+content-type: application/json
+
+{
+  "update_id": 151316384,
+  "message": {
+    "message_id": 50,
+    "from": {
+      "id": 1266264139,
+      "is_bot": false,
+      "first_name": "Diego",
+      "username": "dforce2055",
+      "language_code": "en"
+    },
+    "chat": {
+      "id": 1266264139,
+      "first_name": "Diego",
+      "username": "dforce2055",
+      "type": "private"
+    },
+    "date": 1677761254,
+    "text": "/dolarblue",
+    "entities": [
+      {
+        "offset": 0,
+        "length": 6,
+        "type": "bot_command"
+      }
+    ]
+  }
+}
+
 ### send a custom message through the bot
 POST http://localhost:5000/api/v1/send-message HTTP/1.1
 content-type: application/json
