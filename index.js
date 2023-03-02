@@ -147,7 +147,7 @@ const handleResponse = async ({ chat }) => {
     
   } catch (error) {
     console.error(error)
-    const chatId = chat.message.chat.id
+    const chatId = chat?.message?.chat?.id || chat?.edited_message?.chat?.id
     return {
       chatId,
       message: 'Lo siento, todavía no sé, como responder esa pregunta. Podes consultar el menu de opciones que tengo disponibles, abajo a la izquierda.'
