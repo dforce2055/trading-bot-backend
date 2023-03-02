@@ -9,10 +9,12 @@ const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
 const URI = `/webhook/${TOKEN}`
 const WEBHOOK_URL = SERVER_URL + URI
 const BOT_COMMANDS = [
-  { text: '/hola', description: 'Saludo cordial' },
-  { text: '/token', description: 'Token de acceso a la plataforma' },
-  { text: '/dolarblue', description: 'Cotización dólar blue en este momento' },
-  { text: '/undefined', description: 'Mensaje informativo' },
+  { text: '/start', description: 'Saludo cordial', value: 'Saludo cordial' },
+  { text: '/hola', description: 'Saludo cordial', value: 'Saludo cordial' },
+  { text: '/token', description: 'Token de acceso a la plataforma', value: 'Token de acceso a la plataforma' },
+  { text: '/dolarblue', description: 'Cotización dólar blue en este momento', value: 'Cotización dólar blue en este momento' },
+  { text: '/undefined', description: 'Mensaje informativo', value: 'Mensaje informativo' },
+  { text: '/token-recibed', description: 'Confirma recepción del token', value: '🔑 Token de acceso recibido correctamente'},
 ]
 
 const app = express()
@@ -79,6 +81,11 @@ const getAcction = ({ text, botCommands }) => {
       action: undefinedAction
     }
   
+  if (text.includes('/token=')) {
+    const action = botCommands.find(command => command.text === '/token-recibed')
+    return { action }
+  }
+  
   const action = botCommands.find(command => command.text === text)
   if (!action)
     return {
@@ -92,6 +99,10 @@ const executeAction = async ({ action, username, firstName }) => {
   let message = `Lo siento, todavía no sé, como responder esa pregunta. Podes consultar el menu de opciones que tengo disponibles, abajo a la izquierda.`
 
   switch (text) {
+    case '/start':
+      message = `Bien, para comenzara a operar necesito ingrese tu token de acceso🔑.
+        ingresa /token=TU_TOKEN_DE_ACCESO`
+      return { message }
     case '/hola':
       message = `Hola ${ firstName || username }, 
         soy un bot 🤖 trader, estoy en desarrollo. 
@@ -100,6 +111,10 @@ const executeAction = async ({ action, username, firstName }) => {
     case '/token':
       message = `🔑 Ingresa tu token de acceso a la plataforma, debería ser algo parecido a esto XXErgW222NohksffsadZrN2055PKxbl_bot.
         Si todavía no tenes tu token de accesso, registrate primero para obtenerlo.`
+      return { message }
+    case '/token-recibed':
+      // TODO: verify token
+      message = action.value
       return { message }
     case '/dolarblue':
       const price = await getDolarBluePrice()
