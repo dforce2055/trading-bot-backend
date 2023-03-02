@@ -20,7 +20,7 @@ content-type: application/json
       "type": "private"
     },
     "date": 1677761254,
-    "text": "/dolarblue",
+    "text": "/token=bigote",
     "entities": [
       {
         "offset": 0,
