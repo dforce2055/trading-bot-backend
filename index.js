@@ -9,7 +9,7 @@ const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
 const URI = `/webhook/${TOKEN}`
 const WEBHOOK_URL = SERVER_URL + URI
 const BOT_COMMANDS = [
-  { text: '/hi', description: 'Saludo cordial' },
+  { text: '/hola', description: 'Saludo cordial' },
   { text: '/token', description: 'Token de acceso a la plataforma' },
   { text: '/dolarblue', description: 'Cotización dólar blue en este momento' },
   { text: '/undefined', description: 'Mensaje informativo' },
@@ -92,7 +92,7 @@ const executeAction = async ({ action, username, firstName }) => {
   let message = `Lo siento, todavía no sé, como responder esa pregunta.`
 
   switch (text) {
-    case '/hi':
+    case '/hola':
       message = `Hola ${ firstName || username }, 
         soy un bot 🤖 trader, estoy en desarrollo. 
         🚀 Pronto tendrás más novedades...`
