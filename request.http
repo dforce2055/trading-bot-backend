@@ -3,6 +3,6 @@ POST http://localhost:5000/api/v1/send-message HTTP/1.1
 content-type: application/json
 
 {
-  "message": "Mi amo me programo para seducirte",
-  "chatId": 1524071885
+  "message": "Hi Dude!",
+  "chatId": 1266264139
 }
